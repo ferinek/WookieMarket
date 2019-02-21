@@ -12,13 +12,11 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
-import com.google.api.services.sheets.v4.model.Spreadsheet;
 import com.kslodowicz.wookiemarket.helper.GoogleSheetHelper;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,19 +29,19 @@ public class GoogleSpreedSheetBean {
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
     private static GoogleSheetHelper helper;
 
-    public static GoogleSheetHelper getSpreedSheet()  {
-       try {
-           if (helper == null) {
-               final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-               final String spreadsheetId = "1X_syN4NAlIxHbM4ZBac2ShvaPh6oJh0aQPzKX2CXNVU";
-               Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT)).setApplicationName(APPLICATION_NAME).build();
-               helper = new GoogleSheetHelper(service);
-           }
-           return helper;
-       }catch (Exception e){
-           System.err.println("ZJEBALO SIE RÓWNO");
-       }
-       return null;
+    public static GoogleSheetHelper getSpreedSheet() {
+        try {
+            if (helper == null) {
+                final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+                final String spreadsheetId = "1X_syN4NAlIxHbM4ZBac2ShvaPh6oJh0aQPzKX2CXNVU";
+                Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT)).setApplicationName(APPLICATION_NAME).build();
+                helper = new GoogleSheetHelper(service, spreadsheetId);
+            }
+            return helper;
+        } catch (Exception e) {
+            System.err.println("ZJEBALO SIE RÓWNO");
+        }
+        return null;
     }
 
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {

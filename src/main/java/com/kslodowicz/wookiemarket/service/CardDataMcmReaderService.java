@@ -23,7 +23,7 @@ public class CardDataMcmReaderService {
             getDriver().navigate().to(link);
             WebElement element = getDriver().findElement(By.cssSelector(".page-title-container h1"));
             domain.setCardName(element.getText().split("\n")[0]);
-            domain.setExpansionName(element.findElement(By.cssSelector("span")).getText());
+            domain.setExpansionName(element.findElement(By.cssSelector("span")).getText().split("-")[0]);
 
             List<WebElement> infos = getDriver().findElement(By.cssSelector(".info-list-container dl")).findElements(By.cssSelector("dd"));
             Collections.reverse(infos);

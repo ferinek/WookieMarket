@@ -1,22 +1,32 @@
 package com.kslodowicz.wookiemarket.service;
 
-import com.google.api.services.sheets.v4.model.GridData;
-import com.google.api.services.sheets.v4.model.Sheet;
+import com.google.api.services.sheets.v4.model.ValueRange;
 import com.kslodowicz.wookiemarket.bean.GoogleSpreedSheetBean;
+import com.kslodowicz.wookiemarket.domain.CardDomain;
 import com.kslodowicz.wookiemarket.helper.GoogleSheetHelper;
 
 import java.util.List;
 
 public class GoogleSheetService {
 
+    CardDataMcmReaderService mcmReaderService;
 
-    public void getCardData(){
+    public GoogleSheetService() {
+        mcmReaderService = new CardDataMcmReaderService();
+    }
+
+    public void getCardData() {
         GoogleSheetHelper spreedSheet = GoogleSpreedSheetBean.getSpreedSheet();
-        List<Sheet> sellSheetsNames = spreedSheet.getSheet();
-        for (Sheet sheet:sellSheetsNames){
+        List<String> sellSheetsNames = spreedSheet.getSellSheetsNames();
+        for (String sheetName : sellSheetsNames) {
+            ValueRange values = spreedSheet.getSheet(sheetName);
+            List<List<Object>> rows = values.getValues();
+            for (List<Object> row : rows) {
+                String link = (String) row.get(5);
+                CardDomain dataFromMcm = mcmReaderService.getDataFromMcm(link);
+                System.out.println(dataFromMcm);
 
-            List<GridData> data = sheet.getData();
-
+            }
         }
     }
 
