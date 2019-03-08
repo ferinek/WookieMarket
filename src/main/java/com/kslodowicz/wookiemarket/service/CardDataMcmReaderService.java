@@ -27,7 +27,7 @@ public class CardDataMcmReaderService {
 
             List<WebElement> infos = getDriver().findElement(By.cssSelector(".info-list-container dl")).findElements(By.cssSelector("dd"));
             Collections.reverse(infos);
-            domain.setPricaTrend(infos.get(0).getText().split("€")[0]);
+            domain.setPriceTrend(infos.get(0).getText().split("€")[0]);
             return domain;
         }
         return null;

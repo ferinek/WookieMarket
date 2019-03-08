@@ -33,12 +33,12 @@ public class CardDomain {
         this.expansionName = expansionName;
     }
 
-    public String getPricaTrend() {
+    public String getPriceTrend() {
         return pricaTrend;
     }
 
-    public void setPricaTrend(String pricaTrend) {
-        this.pricaTrend = pricaTrend;
+    public void setPriceTrend(String priceTrend) {
+        this.pricaTrend = priceTrend;
     }
 
     public String getLink() {

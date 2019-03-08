@@ -39,7 +39,8 @@ public class GoogleSpreedSheetBean {
             }
             return helper;
         } catch (Exception e) {
-            System.err.println("ZJEBALO SIE RÓWNO");
+            System.err.println("ZJEBALO SIE RÓWNO" );
+            e.printStackTrace();
         }
         return null;
     }
